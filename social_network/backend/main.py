@@ -3,7 +3,10 @@ import sys
 sys.path.append("/Users/pllueca/Code/simple_social_network")
 
 from uuid import UUID
+
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+
 from social_network.core.repositories.interfaces.models import User, Post
 from social_network.core.repositories.interfaces.user import UserRepository
 from social_network.core.repositories.interfaces.post import PostRepository
@@ -13,6 +16,20 @@ from social_network.core.repositories.sql.db import get_session
 from social_network.core.services import service
 
 app = FastAPI()
+
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:5173",  # vite frontend
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # repository instantiation
