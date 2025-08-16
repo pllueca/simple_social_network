@@ -11,7 +11,7 @@ class User(BaseModel):
 
 class Post(BaseModel):
     id: UUID
-    author_id: UUID  # id of the user
+    author_id: UUID  # user id
     title: str
     body: str
     created_at: datetime

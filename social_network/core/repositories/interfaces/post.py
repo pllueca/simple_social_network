@@ -15,3 +15,7 @@ class PostRepository(abc.ABC):
     @abc.abstractmethod
     def list_by_author(self, author_id: UUID) -> list[Post]:
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def list(self) -> list[Post]:
+        raise NotImplementedError

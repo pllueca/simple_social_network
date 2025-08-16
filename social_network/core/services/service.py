@@ -1,7 +1,8 @@
-from uuid import uuid4
+from uuid import uuid4, UUID
 from datetime import datetime
-from social_network.core.repositories.interfaces.models import User
+from social_network.core.repositories.interfaces.models import User, Post
 from social_network.core.repositories.interfaces.user import UserRepository
+from social_network.core.repositories.interfaces.post import PostRepository
 
 
 def create_user(username: str, user_repo: UserRepository) -> User:
@@ -13,5 +14,40 @@ def create_user(username: str, user_repo: UserRepository) -> User:
     return user
 
 
+def get_user(user_id: UUID, user_repo: UserRepository) -> User | None:
+    return user_repo.get(user_id)
+
+
 def get_users(user_repo: UserRepository) -> list[User]:
     return user_repo.list()
+
+
+def get_username_id(username: str, user_repo: UserRepository) -> UUID:
+    if (user := user_repo.get_by_username(username)) is None:
+        raise ValueError()
+    return user.id
+
+
+def create_post(
+    user_id: UUID,
+    title: str,
+    body: str,
+    post_repo: PostRepository,
+) -> Post:
+    post = Post(
+        id=uuid4(), author_id=user_id, title=title, body=body, created_at=datetime.now()
+    )
+    post_repo.add(post)
+    return post
+
+
+def get_post(post_id: UUID, post_repo: PostRepository):
+    return post_repo.get(post_id)
+
+
+def list_all_posts(post_repo: PostRepository):
+    return post_repo.list()
+
+
+def list_posts_by_author(author_id: UUID, post_repo: PostRepository) -> list[Post]:
+    return post_repo.list_by_author(author_id)
