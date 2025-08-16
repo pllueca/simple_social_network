@@ -1,7 +1,7 @@
 from uuid import uuid4
 from datetime import datetime
-from src.domain import User
-from src.interfaces import UserRepository
+from social_network.core.repositories.interfaces.models import User
+from social_network.core.repositories.interfaces.user import UserRepository
 
 
 def create_user(username: str, user_repo: UserRepository) -> User:

@@ -1,6 +1,8 @@
 import abc
-from src.domain import User, Post
-from uuid import UUID
+from datetime import datetime
+from pydantic import BaseModel
+from uuid import UUID, uuid4
+from social_network.core.repositories.interfaces.models import User
 
 
 class UserRepository(abc.ABC):
@@ -18,18 +20,4 @@ class UserRepository(abc.ABC):
 
     @abc.abstractmethod
     def get_by_username(self, username: str) -> User | None:
-        raise NotImplementedError
-
-
-class PostRepository(abc.ABC):
-    @abc.abstractmethod
-    def add(self, post: Post) -> None:
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get(self, post_id: UUID) -> Post | None:
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def list_by_author(self, author_id: UUID) -> list[Post]:
         raise NotImplementedError

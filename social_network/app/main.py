@@ -1,15 +1,27 @@
+import sys
+
+sys.path.append("/Users/pllueca/Code/simple_social_network")
+
 from uuid import UUID
 from fastapi import FastAPI, Depends, HTTPException
-from src.domain import User, Post
-from src.interfaces import UserRepository, PostRepository
-from src.implementations.in_memory import USER_REPO
-from src import service
+from social_network.core.repositories.interfaces.models import User
+from social_network.core.repositories.interfaces.user import (
+    UserRepository,
+)
+from social_network.core.repositories.sql.user import SQLUserRepository
+from social_network.core.repositories.sql.db import get_session
+from social_network.core.services import service
 
 app = FastAPI()
 
 
 def get_user_repo() -> UserRepository:
-    return USER_REPO
+    db = get_session()
+    try:
+        return SQLUserRepository(db)
+    finally:
+        db.close()
+        print("session closed")
 
 
 @app.post("/users", response_model=User)
