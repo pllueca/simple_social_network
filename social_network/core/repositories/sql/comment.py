@@ -1,10 +1,10 @@
+from uuid import UUID
+
+from sqlalchemy.orm import Session
+
 from social_network.core.repositories.interfaces.comment import CommentRepository
 from social_network.core.repositories.interfaces.models import Comment
-
 from social_network.core.repositories.sql.models.comment import Comment as CommentModel
-
-from uuid import UUID
-from sqlalchemy.orm import Session
 
 
 class SQLCommentRepository(CommentRepository):

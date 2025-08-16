@@ -1,6 +1,7 @@
+from uuid import UUID
+
 from social_network.core.repositories.interfaces.models import User
 from social_network.core.repositories.interfaces.user import UserRepository
-from uuid import UUID
 
 
 class InMemoryUserRepository(UserRepository):

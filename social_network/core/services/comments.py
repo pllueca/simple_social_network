@@ -1,9 +1,10 @@
-from uuid import uuid4, UUID
 from datetime import datetime
-from social_network.core.repositories.interfaces.models import User, Post, Comment
-from social_network.core.repositories.interfaces.user import UserRepository
-from social_network.core.repositories.interfaces.post import PostRepository
+from uuid import UUID, uuid4
+
 from social_network.core.repositories.interfaces.comment import CommentRepository
+from social_network.core.repositories.interfaces.models import Comment, Post, User
+from social_network.core.repositories.interfaces.post import PostRepository
+from social_network.core.repositories.interfaces.user import UserRepository
 from social_network.core.services.common import ResourceMissingError
 
 

@@ -1,5 +1,6 @@
 import abc
 from uuid import UUID
+
 from social_network.core.repositories.interfaces.models import Post
 
 

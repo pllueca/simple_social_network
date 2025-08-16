@@ -1,8 +1,9 @@
 from uuid import UUID
+
 from sqlalchemy.orm import Session
 
-from social_network.core.repositories.interfaces.post import PostRepository
 from social_network.core.repositories.interfaces.models import Post
+from social_network.core.repositories.interfaces.post import PostRepository
 from social_network.core.repositories.sql.models.post import Post as PostModel
 
 

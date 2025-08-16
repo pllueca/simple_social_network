@@ -2,22 +2,22 @@ import sys
 
 sys.path.append("/Users/pllueca/Code/simple_social_network")
 
-from uuid import UUID
 from dataclasses import dataclass
+from uuid import UUID
 
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from social_network.core.repositories.interfaces.models import User, Post, Comment
-from social_network.core.repositories.interfaces.user import UserRepository
-from social_network.core.repositories.interfaces.post import PostRepository
 from social_network.core.repositories.interfaces.comment import CommentRepository
-from social_network.core.repositories.sql.user import SQLUserRepository
-from social_network.core.repositories.sql.post import SQLPostRepository
+from social_network.core.repositories.interfaces.models import Comment, Post, User
+from social_network.core.repositories.interfaces.post import PostRepository
+from social_network.core.repositories.interfaces.user import UserRepository
 from social_network.core.repositories.sql.comment import SQLCommentRepository
 from social_network.core.repositories.sql.db import get_session
-from social_network.core.services import service
+from social_network.core.repositories.sql.post import SQLPostRepository
+from social_network.core.repositories.sql.user import SQLUserRepository
 from social_network.core.services import comments as comments_service
+from social_network.core.services import service
 
 app = FastAPI()
 

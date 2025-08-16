@@ -1,4 +1,5 @@
 from uuid import UUID
+
 from social_network.core.repositories.interfaces.models import Post
 from social_network.core.repositories.interfaces.post import PostRepository
 

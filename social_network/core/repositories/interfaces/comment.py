@@ -1,4 +1,5 @@
 import abc
+
 from social_network.core.repositories.interfaces.models import Comment
 
 

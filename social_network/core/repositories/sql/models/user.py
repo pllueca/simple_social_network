@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime, UUID
-from sqlalchemy.orm import relationship
-
 from datetime import datetime, timezone
+
+from sqlalchemy import UUID, Column, DateTime, Integer, String
+from sqlalchemy.orm import relationship
 
 from social_network.core.repositories.sql.db import Base
 

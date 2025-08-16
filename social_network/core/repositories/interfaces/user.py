@@ -1,7 +1,9 @@
 import abc
 from datetime import datetime
-from pydantic import BaseModel
 from uuid import UUID, uuid4
+
+from pydantic import BaseModel
+
 from social_network.core.repositories.interfaces.models import User
 
 

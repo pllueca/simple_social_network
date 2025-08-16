@@ -1,7 +1,8 @@
 from uuid import UUID
+
 from sqlalchemy.orm import Session
 
-from social_network.core.repositories.interfaces.user import UserRepository, User
+from social_network.core.repositories.interfaces.user import User, UserRepository
 from social_network.core.repositories.sql.models.user import User as UserModel
 
 

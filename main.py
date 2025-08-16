@@ -1,24 +1,23 @@
+import random
 from uuid import UUID
-from social_network.core.repositories.interfaces.models import User, Post
-from social_network.core.repositories.interfaces.user import UserRepository
-from social_network.core.repositories.interfaces.post import PostRepository
-from social_network.core.repositories.interfaces.comment import CommentRepository
 
+from social_network.core.repositories.interfaces.comment import CommentRepository
+from social_network.core.repositories.interfaces.models import Post, User
+from social_network.core.repositories.interfaces.post import PostRepository
+from social_network.core.repositories.interfaces.user import UserRepository
+from social_network.core.repositories.sql.comment import SQLCommentRepository
+from social_network.core.repositories.sql.db import get_session
+from social_network.core.repositories.sql.post import SQLPostRepository
+from social_network.core.repositories.sql.user import SQLUserRepository
+from social_network.core.services.comments import create_comment, get_post_comments
 from social_network.core.services.service import (
-    create_user,
-    get_users,
-    get_post,
     create_post,
+    create_user,
+    get_post,
+    get_users,
     list_all_posts,
     list_posts_by_author,
 )
-import random
-from social_network.core.services.comments import create_comment, get_post_comments
-
-from social_network.core.repositories.sql.user import SQLUserRepository
-from social_network.core.repositories.sql.post import SQLPostRepository
-from social_network.core.repositories.sql.comment import SQLCommentRepository
-from social_network.core.repositories.sql.db import get_session
 
 
 def get_repos() -> tuple[UserRepository, PostRepository, CommentRepository]:

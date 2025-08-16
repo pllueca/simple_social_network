@@ -1,6 +1,7 @@
 from datetime import datetime
-from pydantic import BaseModel
 from uuid import UUID, uuid4
+
+from pydantic import BaseModel
 
 
 class User(BaseModel):
