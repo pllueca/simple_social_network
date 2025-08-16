@@ -16,8 +16,8 @@ from social_network.core.repositories.sql.comment import SQLCommentRepository
 from social_network.core.repositories.sql.db import get_session
 from social_network.core.repositories.sql.post import SQLPostRepository
 from social_network.core.repositories.sql.user import SQLUserRepository
-from social_network.core.services import comments as comments_service
 from social_network.core.services import service
+from social_network.core.services.models import UserInteractionsSummary
 
 app = FastAPI()
 
@@ -91,6 +91,19 @@ def get_user(user_id: UUID, user_repo: UserRepository = Depends(get_user_repo)):
     return user
 
 
+@app.get("/users/{user_id}/top_interactions", response_model=UserInteractionsSummary)
+def get_user_top_interactions(user_id: UUID, repos: Repos = Depends(get_all_repos)):
+    user = service.get_user(user_id, repos.user)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return service.compute_user_top_interactions(
+        user.id,
+        user_repo=repos.user,
+        post_repo=repos.post,
+        comment_repo=repos.comment,
+    )
+
+
 @app.get("/posts", response_model=list[Post])
 def list_posts(post_repo: PostRepository = Depends(get_post_repo)):
     return service.list_all_posts(post_repo)
@@ -108,7 +121,7 @@ def get_post(post_id: UUID, post_repo: PostRepository = Depends(get_post_repo)):
 def get_post_comments(post_id: UUID, repos: Repos = Depends(get_all_repos)):
     if service.get_post(post_id, repos.post) is None:
         raise HTTPException(status_code=404)
-    return comments_service.get_post_comments(post_id, repos.comment)
+    return service.get_post_comments(post_id, repos.comment)
 
 
 @app.post("/posts", response_model=Post)
@@ -150,7 +163,7 @@ def create_comment(
     if service.get_post(post_id, repos.post) is None:
         raise HTTPException(status_code=404)
 
-    return comments_service.create_comment(
+    return service.create_comment(
         author_id=author_id,
         post_id=post_id,
         comment_body=body,
