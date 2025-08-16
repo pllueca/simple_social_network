@@ -3,12 +3,13 @@ from datetime import datetime
 from social_network.core.repositories.interfaces.models import User, Post
 from social_network.core.repositories.interfaces.user import UserRepository
 from social_network.core.repositories.interfaces.post import PostRepository
+from social_network.core.services.common import ResourceMissingError
 
 
 def create_user(username: str, user_repo: UserRepository) -> User:
     # check if exists a user with this username.
     if user_repo.get_by_username(username) is not None:
-        raise ValueError("already exists user with this name")
+        raise ValueError(f"Already exists User with name {username}")
     user = User(id=uuid4(), username=username, created_at=datetime.now())
     user_repo.add(user)
     return user
@@ -24,7 +25,7 @@ def get_users(user_repo: UserRepository) -> list[User]:
 
 def get_username_id(username: str, user_repo: UserRepository) -> UUID:
     if (user := user_repo.get_by_username(username)) is None:
-        raise ValueError()
+        raise ResourceMissingError(f"No User with username {username}")
     return user.id
 
 
@@ -35,7 +36,11 @@ def create_post(
     post_repo: PostRepository,
 ) -> Post:
     post = Post(
-        id=uuid4(), author_id=user_id, title=title, body=body, created_at=datetime.now()
+        id=uuid4(),
+        author_id=user_id,
+        title=title,
+        body=body,
+        created_at=datetime.now(),
     )
     post_repo.add(post)
     return post

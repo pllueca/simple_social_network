@@ -14,3 +14,4 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.now(timezone.utc))
 
     posts = relationship("Post", back_populates="author")
+    comments = relationship("Comment", back_populates="author")

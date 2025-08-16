@@ -14,3 +14,5 @@ class Post(Base):
     title = Column(String(120), nullable=False)
     body = Column(Text)
     created_at = Column(DateTime, default=datetime.now(timezone.utc))
+
+    comments = relationship("Comment", back_populates="post")

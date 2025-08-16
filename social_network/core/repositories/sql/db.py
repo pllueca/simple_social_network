@@ -3,10 +3,15 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 DATABASE_URL = "sqlite:////Users/pllueca/Code/simple_social_network/social_network/core/repositories/sql/mydatabase.db"
-engine = create_engine(DATABASE_URL)
+
+engine = create_engine(DATABASE_URL, pool_size=10, max_overflow=20)
 Base = declarative_base()
 
-session_maker = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+session_maker = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine,
+)
 
 
 def get_session():
