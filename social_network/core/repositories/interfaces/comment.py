@@ -4,7 +4,6 @@ from social_network.core.repositories.interfaces.models import Comment
 
 
 class CommentRepository(abc.ABC):
-
     @abc.abstractmethod
     def add(self, comment: Comment):
         raise NotImplementedError

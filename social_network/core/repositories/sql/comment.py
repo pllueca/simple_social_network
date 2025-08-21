@@ -8,7 +8,6 @@ from social_network.core.repositories.sql.models.comment import Comment as Comme
 
 
 class SQLCommentRepository(CommentRepository):
-
     def __init__(self, db: Session):
         self.db = db
 

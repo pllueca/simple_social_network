@@ -156,7 +156,6 @@ def create_comment(
     body,
     repos: Repos = Depends(get_all_repos),
 ) -> Comment:
-
     if service.get_user(author_id, repos.user) is None:
         raise HTTPException(status_code=404)
 

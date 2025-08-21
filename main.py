@@ -58,7 +58,6 @@ def post_title(idx):
 
 
 def create_data():
-
     user_repo, post_repo, comment_repo = get_repos()
 
     usernames = [

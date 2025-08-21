@@ -102,7 +102,6 @@ def compute_user_top_interactions(
     post_repo: PostRepository,
     comment_repo: CommentRepository,
 ) -> UserInteractionsSummary:
-
     user = user_repo.get(user_id)
     if not user:
         raise ResourceMissingError()
